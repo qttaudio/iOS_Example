@@ -10,9 +10,9 @@
 #define ConfigConstans_h
 
 //APP ID
-#define APPID @"18140105956"
+#define APPID @"Project AppKey"
 //token
-#define TOKEN @"18140105956"
+#define TOKEN @"Project Token"
 
 
 #endif /* ConfigConstans_h */
