@@ -7,6 +7,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSInteger, QttLogLevel) {
+    LOG_LEVEL_OFF     = 0, //不输出日志信息
+    LOG_LEVEL_DEBUG   = 1, //输出SDK所有日志信息
+    LOG_LEVEL_MESSAGE = 2, //输出FATAL、ERROR、WARNING和MESSAGE级别的日志信息
+    LOG_LEVEL_WARNING = 3, //输出FATAL、ERROR和WARNING级别的日志信息
+    LOG_LEVEL_ERROR   = 4, //输出FATAL和ERROR级别的日志信息
+    LOG_LEVEL_FATAL   = 5 //输出FATAL级别的日志信息
+};
+
 typedef NS_ENUM(NSInteger, QttErrorCode) {
     ERR_OK                        = 0, //没有错误
     ERR_FAILURE                   = 1, //没有明确归类的错误
@@ -238,10 +247,11 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
     + (void)setLogFile:(NSString*)logFile maxSize:(int)maxSize;
 
     /**
-     * 调试模式日志输出
-     * @param enable true:打开调试日志；false:关闭调试日志
+     * 设置日志输出等级
+     * 日志级别顺序依次为 OFF、FATAL、ERROR、WARNING、MESSAGE 和 DEBUG。可以看到设置的级别之前所有级别的日志信息。
+     * @param level 日志级别
      */
-    + (void)enableDebugLog:(bool)enable;
+    + (void)setLogLevel:(QttLogLevel)level;
 
     /**
      * 设置App授权信息,getEngineInstance方法前非必须调用
