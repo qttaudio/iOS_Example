@@ -255,6 +255,9 @@
     [self.btn_play setBackgroundImage:[UIImage imageNamed:@"play_icon"] forState:UIControlStateNormal];
     self.progressView.value = 0.0f;
     self.label_startTime.text = @"00:00";
+    self.label_endTime.text = @"00:00";
+    self.progressView.minimumValue = 0;
+    self.progressView.maximumValue = 0;
     [self stopTimer];
 }
 
