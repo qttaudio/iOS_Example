@@ -49,6 +49,7 @@
 		0B379DF825849CB500D898E6 /* UIColor+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B379DCA25849CB500D898E6 /* UIColor+Ext.m */; };
 		0B379DF925849CB500D898E6 /* ToastUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B379DCB25849CB500D898E6 /* ToastUtil.m */; };
 		0B379DFA25849CB500D898E6 /* TimeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B379DCD25849CB500D898E6 /* TimeUtils.m */; };
+		0BB0FA6125CAD0AA009AF349 /* CDZPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB0FA5F25CAD0AA009AF349 /* CDZPicker.m */; };
 		18360AB0255E7B61001CA073 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 18360AAF255E7B61001CA073 /* libc++.tbd */; };
 		18DD97D3255EAE5B0047EE9F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18DD97D2255EAE5B0047EE9F /* AudioToolbox.framework */; };
 /* End PBXBuildFile section */
@@ -118,6 +119,8 @@
 		0B379DCE25849CB500D898E6 /* DataManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManage.h; sourceTree = "<group>"; };
 		0B379DCF25849CB500D898E6 /* NSBundle+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+Helper.h"; sourceTree = "<group>"; };
 		0B379DD025849CB500D898E6 /* EasyAudioTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyAudioTool.h; sourceTree = "<group>"; };
+		0BB0FA5F25CAD0AA009AF349 /* CDZPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDZPicker.m; sourceTree = "<group>"; };
+		0BB0FA6025CAD0AA009AF349 /* CDZPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDZPicker.h; sourceTree = "<group>"; };
 		18360AAF255E7B61001CA073 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		18DD97D2255EAE5B0047EE9F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		18ED5CE52552816F00362221 /* iOS_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -141,6 +144,7 @@
 		0B379D8625849CB500D898E6 /* iOS_Example */ = {
 			isa = PBXGroup;
 			children = (
+				0BB0FA5E25CAD0AA009AF349 /* CDZPicker */,
 				0B379D8725849CB500D898E6 /* AppDelegate.h */,
 				0B379D8825849CB500D898E6 /* ConfigConstans.h */,
 				0B379D8925849CB500D898E6 /* Bean */,
@@ -280,6 +284,15 @@
 			path = Tool;
 			sourceTree = "<group>";
 		};
+		0BB0FA5E25CAD0AA009AF349 /* CDZPicker */ = {
+			isa = PBXGroup;
+			children = (
+				0BB0FA5F25CAD0AA009AF349 /* CDZPicker.m */,
+				0BB0FA6025CAD0AA009AF349 /* CDZPicker.h */,
+			);
+			path = CDZPicker;
+			sourceTree = "<group>";
+		};
 		18360AAE255E7B61001CA073 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -408,6 +421,7 @@
 				0B379DDA25849CB500D898E6 /* RippleAnimationView.m in Sources */,
 				0B379DF725849CB500D898E6 /* DataManage.m in Sources */,
 				0B379DD925849CB500D898E6 /* HomeVct.m in Sources */,
+				0BB0FA6125CAD0AA009AF349 /* CDZPicker.m in Sources */,
 				0B379DE125849CB500D898E6 /* SVProgressHUD.m in Sources */,
 				0B379DF925849CB500D898E6 /* ToastUtil.m in Sources */,
 				0B379DD625849CB500D898E6 /* HomePersonCell.m in Sources */,

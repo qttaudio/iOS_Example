@@ -23,10 +23,11 @@ typedef void(^StatusCallBack)(BOOL isPlaying);
 @interface PopView : UIView
 @property (assign,nonatomic) MusicPlayState playState;
 @property (strong,nonatomic) QttChannelEngine *rtcEngine;
-@property (copy,nonatomic) NSString *musicPath;
 
 //播放按钮
 @property (weak, nonatomic) IBOutlet UIButton *btn_play;
+//歌曲名字
+@property (weak, nonatomic) IBOutlet UILabel *label_musicName;
 //开始时间
 @property (weak, nonatomic) IBOutlet UILabel *label_startTime;
 //结束时间

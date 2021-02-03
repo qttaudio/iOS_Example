@@ -8,12 +8,17 @@
 
 #import "PopView.h"
 //#import "EasyAudioTool.h"
+#import <MediaPlayer/MediaPlayer.h>
+#import "CDZPicker.h"
 
 @interface PopView ()
-{
-    //计时器
-    NSTimer *timer;
-}
+@property(nonatomic,strong) NSMutableArray *musicArray;
+@property(nonatomic,strong) NSMutableDictionary *musicDict;
+@property(nonatomic,copy) NSString *selectedMusicName;
+@property(nonatomic,copy) NSString *selectedMusicPath;
+//计时器
+@property(nonatomic,strong) NSTimer *timer;
+
 @end
 @implementation PopView
 
@@ -36,9 +41,21 @@
         [self.bgView addGestureRecognizer:tapGesture];
         //重置状态
         self.playState = READY;
+        
+        self.musicArray = [NSMutableArray array];
+        self.musicDict = [[NSMutableDictionary alloc] init];
+        self.selectedMusicName = nil;
+        self.selectedMusicPath = nil;
         //设置音频地址
         NSBundle *musicBundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"music" ofType:@"bundle"]];
-        self.musicPath = [musicBundle pathForResource:@"night" ofType:@"mp3"];
+        NSString* musicPath = [musicBundle pathForResource:@"night" ofType:@"mp3"];
+        [_musicArray addObject:@"夜的钢琴曲"];
+        [_musicDict setValue:musicPath forKey:@"夜的钢琴曲"];
+        _selectedMusicName = @"夜的钢琴曲";
+        _selectedMusicPath = musicPath;
+        
+        [self getItunesMusic];
+        
 //        [[EasyAudioTool sharedInstance] setAudioPath:musicPath];
 //        //设置时长
 //        self.progressView.minimumValue = 0;
@@ -66,19 +83,19 @@
 //开始计时
 -(NSTimer *) startTimer
 {
-    if (!timer)
+    if (!_timer)
     {
-        timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateProgress:) userInfo:nil repeats:YES];
+        _timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateProgress:) userInfo:nil repeats:YES];
     }
     
-    return timer;
+    return _timer;
 }
 //停止计时
 -(void) stopTimer
 {
-    if (timer) {
-        [timer invalidate];
-        timer = nil;
+    if (_timer) {
+        [_timer invalidate];
+        _timer = nil;
     }
 }
 
@@ -172,13 +189,12 @@
     }
 }
 
-//播放或暂停
-- (IBAction)playOrPauseMusic:(id)sender
+- (void)doPlayOrPauseMusic
 {
     if (self.playState == READY) {
         self.playState = PLAYING;
         //开始播放
-        [self.rtcEngine playSound:self.musicPath cycle:1 publish:YES];
+        [self.rtcEngine playSound:self.selectedMusicPath cycle:1 publish:YES];
         //
         [self.btn_play setBackgroundImage:[UIImage imageNamed:@"suspend_icon"] forState:UIControlStateNormal];
         [self startTimer];
@@ -210,15 +226,25 @@
             self.statusCallBack(YES);
         }
     }
-    
 }
-//停止播放
-- (IBAction)stopMusic:(id)sender
+
+//播放或暂停
+- (IBAction)playOrPauseMusic:(id)sender
 {
+    [self doPlayOrPauseMusic];
+}
+
+- (void)doStopMusic {
     [self stopAllAction];
     if (self.statusCallBack) {
         self.statusCallBack(NO);
     }
+}
+
+//停止播放
+- (IBAction)stopMusic:(id)sender
+{
+    [self doStopMusic];
 }
 
 //停止所有动作
@@ -230,6 +256,47 @@
     self.progressView.value = 0.0f;
     self.label_startTime.text = @"00:00";
     [self stopTimer];
+}
+
+//选择音乐
+- (IBAction)selectMusic:(id)sender
+{
+    [CDZPicker showSinglePickerInView:self withBuilder:nil strings:[self.musicArray copy] confirm:^(NSArray<NSString *> * _Nonnull strings, NSArray<NSNumber *> * _Nonnull indexs) {
+            NSLog(@"select:%@, %@", strings.firstObject, [self.musicDict objectForKey:strings.firstObject]);
+        self.label_musicName.text = strings.firstObject;
+        self.selectedMusicName = strings.firstObject;
+        self.selectedMusicPath =  [[self.musicDict objectForKey:self.selectedMusicName] absoluteString];
+        [self doStopMusic];
+        [self doPlayOrPauseMusic];
+        }cancel:^{
+            //your code
+        }];
+}
+
+
+- (void)getItunesMusic {
+
+    // 创建媒体选择队列
+    MPMediaQuery *query = [[MPMediaQuery alloc] init];
+    // 创建读取条件
+    MPMediaPropertyPredicate *albumNamePredicate = [MPMediaPropertyPredicate predicateWithValue:[NSNumber numberWithInt:MPMediaTypeMusic] forProperty:MPMediaItemPropertyMediaType];
+    // 给队列添加读取条件
+    [query addFilterPredicate:albumNamePredicate];
+    // 从队列中获取条件的数组集合
+    NSArray *itemsFromGenericQuery = [query items];
+    // 遍历解析数据
+    for (MPMediaItem *music in itemsFromGenericQuery) {
+        [self resolverMediaItem:music];
+    }
+}
+
+- (void)resolverMediaItem:(MPMediaItem *)music {
+    // 歌名
+    NSString *name = [music valueForProperty:MPMediaItemPropertyTitle];
+    // 歌曲路径
+    NSURL *fileURL = [music valueForProperty:MPMediaItemPropertyAssetURL];
+    [_musicArray addObject:name];
+    [_musicDict setValue:fileURL forKey:name];
 }
 
 -(void) dealloc
