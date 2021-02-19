@@ -297,8 +297,10 @@
     NSString *name = [music valueForProperty:MPMediaItemPropertyTitle];
     // 歌曲路径
     NSURL *fileURL = [music valueForProperty:MPMediaItemPropertyAssetURL];
-    [_musicArray addObject:name];
-    [_musicDict setValue:fileURL forKey:name];
+    if ([_musicDict valueForKey:name] == nil) {
+        [_musicArray addObject:name];
+        [_musicDict setValue:fileURL forKey:name];
+    }
 }
 
 -(void) dealloc
