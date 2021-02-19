@@ -53,7 +53,6 @@
         [_musicDict setValue:musicPath forKey:@"夜的钢琴曲"];
         _selectedMusicName = @"夜的钢琴曲";
         _selectedMusicPath = musicPath;
-        
         [self getItunesMusic];
         
 //        [[EasyAudioTool sharedInstance] setAudioPath:musicPath];
@@ -264,6 +263,7 @@
 //选择音乐
 - (IBAction)selectMusic:(id)sender
 {
+    [self getItunesMusic];
     [CDZPicker showSinglePickerInView:self withBuilder:nil strings:[self.musicArray copy] confirm:^(NSArray<NSString *> * _Nonnull strings, NSArray<NSNumber *> * _Nonnull indexs) {
             NSLog(@"select:%@, %@", strings.firstObject, [self.musicDict objectForKey:strings.firstObject]);
         self.label_musicName.text = strings.firstObject;
@@ -278,7 +278,6 @@
 
 
 - (void)getItunesMusic {
-
     // 创建媒体选择队列
     MPMediaQuery *query = [[MPMediaQuery alloc] init];
     // 创建读取条件
