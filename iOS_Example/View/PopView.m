@@ -11,9 +11,17 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "CDZPicker.h"
 
+@interface MusicItem : NSObject
+@property(copy) NSString *name;
+@property(copy) NSString *url;
+@end
+
+@implementation MusicItem
+
+@end
+
 @interface PopView ()
 @property(nonatomic,strong) NSMutableArray *musicArray;
-@property(nonatomic,strong) NSMutableDictionary *musicDict;
 @property(nonatomic,copy) NSString *selectedMusicName;
 @property(nonatomic,copy) NSString *selectedMusicPath;
 //计时器
@@ -43,14 +51,15 @@
         self.playState = READY;
         
         self.musicArray = [NSMutableArray array];
-        self.musicDict = [[NSMutableDictionary alloc] init];
         self.selectedMusicName = nil;
         self.selectedMusicPath = nil;
         //设置音频地址
         NSBundle *musicBundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"music" ofType:@"bundle"]];
         NSString* musicPath = [musicBundle pathForResource:@"night" ofType:@"mp3"];
-        [_musicArray addObject:@"夜的钢琴曲"];
-        [_musicDict setValue:musicPath forKey:@"夜的钢琴曲"];
+        MusicItem *item = [[MusicItem alloc] init];
+        item.name = @"夜的钢琴曲";
+        item.url = musicPath;
+        [_musicArray addObject:item];
         _selectedMusicName = @"夜的钢琴曲";
         _selectedMusicPath = musicPath;
         [self getItunesMusic];
@@ -234,6 +243,8 @@
 }
 
 - (void)doStopMusic {
+    self.playState = READY;
+    [self.rtcEngine stopSound];
     [self stopAllAction];
     if (self.statusCallBack) {
         self.statusCallBack(NO);
@@ -249,8 +260,6 @@
 //停止所有动作
 -(void) stopAllAction
 {
-    self.playState = READY;
-    [self.rtcEngine stopSound];
     [self.btn_play setBackgroundImage:[UIImage imageNamed:@"play_icon"] forState:UIControlStateNormal];
     self.progressView.value = 0.0f;
     self.label_startTime.text = @"00:00";
@@ -264,11 +273,16 @@
 - (IBAction)selectMusic:(id)sender
 {
     [self getItunesMusic];
-    [CDZPicker showSinglePickerInView:self withBuilder:nil strings:[self.musicArray copy] confirm:^(NSArray<NSString *> * _Nonnull strings, NSArray<NSNumber *> * _Nonnull indexs) {
-            NSLog(@"select:%@, %@", strings.firstObject, [self.musicDict objectForKey:strings.firstObject]);
+    NSMutableArray *musicNames = [NSMutableArray array];
+    for (NSObject *object in _musicArray) {
+        MusicItem *item = (MusicItem*)object;
+        [musicNames addObject:item.name];
+    }
+    [CDZPicker showSinglePickerInView:self withBuilder:nil strings:[musicNames copy] confirm:^(NSArray<NSString *> * _Nonnull strings, NSArray<NSNumber *> * _Nonnull indexs) {
+            NSLog(@"select:%@, %@", strings.firstObject, ((MusicItem*)[self.musicArray objectAtIndex:[indexs.firstObject integerValue]]).url);
         self.label_musicName.text = strings.firstObject;
         self.selectedMusicName = strings.firstObject;
-        self.selectedMusicPath =  [[self.musicDict objectForKey:self.selectedMusicName] absoluteString];
+        self.selectedMusicPath = ((MusicItem*)[self.musicArray objectAtIndex:[indexs.firstObject integerValue]]).url;
         [self doStopMusic];
         [self doPlayOrPauseMusic];
         }cancel:^{
@@ -297,9 +311,19 @@
     NSString *name = [music valueForProperty:MPMediaItemPropertyTitle];
     // 歌曲路径
     NSURL *fileURL = [music valueForProperty:MPMediaItemPropertyAssetURL];
-    if ([_musicDict valueForKey:name] == nil) {
-        [_musicArray addObject:name];
-        [_musicDict setValue:fileURL forKey:name];
+    BOOL inList = false;
+    for (NSObject *object in _musicArray) {
+        MusicItem *item = (MusicItem*)object;
+        if (item.name == name && item.url == [fileURL absoluteString]) {
+            inList = true;
+            break;
+        }
+    }
+    if (!inList) {
+        MusicItem *item = [[MusicItem alloc] init];
+        item.name = name;
+        item.url = [fileURL absoluteString];
+        [_musicArray addObject:item];
     }
 }
 

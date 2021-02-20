@@ -458,9 +458,7 @@
     if (state == SOUND_PLAYER_STATE_PLAYING && self.pop_bgMusic) {
         [self.pop_bgMusic refreshAudioMixingDuration];
     } else if (state == SOUND_PLAYER_STATE_FINISHED && self.pop_bgMusic) {
-        [self.pop_bgMusic stopAllAction];
     } else if (state == SOUND_PLAYER_STATE_STOPPED && self.pop_bgMusic) {
-        [self.pop_bgMusic stopAllAction];
     }
 }
         
