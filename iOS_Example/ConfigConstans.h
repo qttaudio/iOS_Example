@@ -12,7 +12,7 @@
 //APP ID
 #define APPID @"Project AppKey"
 //token
-#define TOKEN @"Project Token"
+#define TOKEN @""  //Project Token
 
 
 #endif /* ConfigConstans_h */
