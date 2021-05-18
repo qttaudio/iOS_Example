@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *tf_roomNum;
 //进入房间按钮
 @property (weak, nonatomic) IBOutlet UIButton *btn_enterRoom;
+@property (weak, nonatomic) IBOutlet UISwitch *source_switch;
 
 @end
 
@@ -99,6 +100,10 @@
     [self performSegueWithIdentifier:@"HomeVct" sender:nil];
 }
 
+- (IBAction)sourceChange:(id)sender {
+    extern int outSourceEnabled;
+    outSourceEnabled = self.source_switch.on;
+}
 
 
 @end

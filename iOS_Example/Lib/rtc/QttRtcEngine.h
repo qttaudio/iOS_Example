@@ -344,7 +344,41 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
      - < 0: 失败.
      */
     - (int)setPlaybackDataObserver:(id<QttRtcDataDelegate>)observer observerId:(unsigned int)observerId samplerate:(int)samplerate channels:(int)channels bufSize:(int)bufSize;
-    
+
+    /**
+    * 开启或关闭外部音频采集
+    * @param enable 开启或关闭
+    * @param samplerate 外部音频源的采样率 (Hz)，可设置为 8000，16000，32000，44100 或 48000
+    * @param channels 外部音频源的通道数，可设置为 1 或 2
+    * @return
+    - 0(ERR_SUCCESS): 成功.
+    - < 0: 失败.
+    */
+    - (int)setExternalRecorder:(bool)enable samplerate:(int)samplerate channels:(int)channels;
+
+    /**
+    * 推送外部音频数据
+    * @param buf 外部音频数据
+    * @param bufSize 外部音频数据大小
+    * @return
+    - 0(ERR_SUCCESS): 成功.
+    - < 0: 失败.
+    */
+    - (int)pushExternalRecordFrame:(char*)buf bufSize:(int)bufSize;
+
+    /**
+    * 开启或关闭外部音频渲染
+    * @param enable 开启或关闭
+    * @param observer 数据监听器
+    * @param samplerate 外部音频源的采样率 (Hz)，可设置为 8000，16000，32000，44100 或 48000
+    * @param channels 外部音频源的通道数，可设置为 1 或 2
+    * @param bufSize 数据回调大小，小于等于0为默认值
+    * @return
+    - 0(ERR_SUCCESS): 成功.
+    - < 0: 失败.
+    */
+    - (int)setExternalPlayer:(bool)enable observer:(id<QttRtcDataDelegate>)observer observerId:(uint32_t)observerId samplerate:(int)samplerate channels:(int)channels bufSize:(int)bufSize;
+
     /**
      * 开启（关闭）音量检测
      * @param intervalMs 检测间隔，毫秒；如果小于等于0，表示关闭音量检测
