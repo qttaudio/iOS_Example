@@ -17,13 +17,14 @@ typedef NS_ENUM(NSInteger, QttLogLevel) {
 };
 
 typedef NS_ENUM(NSInteger, QttErrorCode) {
-    ERR_OK                        = 0, //没有错误
-    ERR_FAILURE                   = 1, //没有明确归类的错误
-    ERR_PARAM_ERROR               = 2, //API调用了无效的参数
-    ERR_START_CAPTURE_DEVICE_FAIL = 3, //启动音频采集设备失败
-    ERR_START_PLAYOUT_DEVICE_FAIL = 4, //启动音频播放设备失败
-    ERR_AUDIO_ROUTR_FAIL          = 5, //音频路由错误
-    ERR_INVALID_APPKEY            = 6  //APPKEY无效
+    ERR_OK                         = 0, //没有错误
+    ERR_FAILURE                    = 1, //没有明确归类的错误
+    ERR_PARAM_ERROR                = 2, //API调用了无效的参数
+    ERR_START_CAPTURE_DEVICE_FAIL  = 3, //启动音频采集设备失败
+    ERR_START_PLAYOUT_DEVICE_FAIL  = 4, //启动音频播放设备失败
+    ERR_AUDIO_ROUTR_FAIL           = 5, //音频路由错误
+    ERR_INVALID_APPKEY             = 6, //APPKEY无效
+    ERR_CLIENT_IS_BANNED_BY_SERVER = 7  //此用户被服务器禁止,服务端踢人场景时会报这个错
 };
 
 typedef NS_ENUM(NSInteger, QttWarnCode) {
