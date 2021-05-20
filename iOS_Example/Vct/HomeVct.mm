@@ -173,7 +173,7 @@ int outSourceEnabled = 0;
             self->mAudioController.delegate = self;
             [self->mAudioController setUpAudioSessionWithSampleRate:48000 channelCount:1 audioCRMode:AudioCRModeExterCaptureExterRender IOType:IOUnitTypeVPIO];
             [self->rtcEngine setExternalRecorder:true samplerate:48000 channels:1];
-            [self->rtcEngine setExternalPlayer:true observer:self observerId:111 samplerate:48000 channels:1 bufSize:0];
+            [self->rtcEngine setExternalPlayer:true observer:self samplerate:48000 channels:1 bufSize:0];
         }
         
         //进入房间
@@ -199,7 +199,7 @@ int outSourceEnabled = 0;
 - (IBAction)closeAction:(id)sender {
     [rtcEngine leave];
     [rtcEngine setExternalRecorder:false samplerate:48000 channels:1];
-    [rtcEngine setExternalPlayer:false observer:self observerId:111 samplerate:48000 channels:1 bufSize:0];
+    [rtcEngine setExternalPlayer:false observer:self samplerate:48000 channels:1 bufSize:0];
     mBuffer.clear();
     if (outSourceEnabled && self->mAudioController != nil) {
         [self->mAudioController stopWork];
@@ -761,17 +761,9 @@ int outSourceEnabled = 0;
 
 }
 
-- (bool)dataEnabled:(unsigned int)observerId {
-    if (observerId == 111)
-        return true;
-    return false;
-}
-
-- (int)onData:(char *)buf len:(int)len observerId:(unsigned int)observerId {
-    if (observerId == 111) {
-        std::lock_guard<std::mutex> lck(mMtx);
-        mBuffer.insert(mBuffer.end(), buf, buf + len);
-    }
+- (int)onData:(char *)buf len:(int)len {
+    std::lock_guard<std::mutex> lck(mMtx);
+    mBuffer.insert(mBuffer.end(), buf, buf + len);
     return 0;
 }
 
