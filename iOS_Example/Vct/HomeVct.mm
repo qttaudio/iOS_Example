@@ -16,7 +16,7 @@
 #import "OnWheat.h"
 #import "TimeUtils.h"
 #import "ToastUtil.h"
-#import "QttRtcEngine.h"
+#import "QttChannelEngine.h"
 #import "ConfigConstans.h"
 #import "NSBundle+Helper.h"
 #import "SVProgressHUD.h"
@@ -37,7 +37,7 @@
 
 int outSourceEnabled = 0;
 
-@interface HomeVct ()<UICollectionViewDelegate,UICollectionViewDataSource,QttRtcEngineDelegate,AudioControllerDelegate, QttRtcDataDelegate>
+@interface HomeVct ()<UICollectionViewDelegate,UICollectionViewDataSource,QttChannelEngineDelegate,AudioControllerDelegate, QttRtcDataDelegate>
 {
     //上麦信息数据
     NSMutableArray *onWheatArray;

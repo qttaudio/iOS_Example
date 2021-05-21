@@ -114,7 +114,7 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
     - (int)onData:(char *)buf len:(int)len;
 @end;
 
-@protocol QttRtcEngineDelegate <NSObject>
+@protocol QttChannelEngineDelegate <NSObject>
 @optional
 
     /**
@@ -308,7 +308,7 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
      - 0(ERR_SUCCESS): 成功.
      - < 0: 失败.
      */
-    - (int)setObserver:(id<QttRtcEngineDelegate>)observer;
+    - (int)setObserver:(id<QttChannelEngineDelegate>)observer;
     
     /**
      * 设置用户id

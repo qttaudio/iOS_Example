@@ -99,7 +99,6 @@
 		0B379DAD25849CB500D898E6 /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
 		0B379DAE25849CB500D898E6 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
 		0B379DAF25849CB500D898E6 /* SVProgressAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressAnimatedView.h; sourceTree = "<group>"; };
-		0B379DB125849CB500D898E6 /* QttRtcEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QttRtcEngine.h; sourceTree = "<group>"; };
 		0B379DB225849CB500D898E6 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		0B379DB425849CB500D898E6 /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
 		0B379DB525849CB500D898E6 /* silence_white_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = silence_white_icon.png; sourceTree = "<group>"; };
@@ -129,6 +128,7 @@
 		0B379DCE25849CB500D898E6 /* DataManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManage.h; sourceTree = "<group>"; };
 		0B379DCF25849CB500D898E6 /* NSBundle+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+Helper.h"; sourceTree = "<group>"; };
 		0B379DD025849CB500D898E6 /* EasyAudioTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyAudioTool.h; sourceTree = "<group>"; };
+		0B50BBAA26574CB900346248 /* QttChannelEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QttChannelEngine.h; sourceTree = "<group>"; };
 		0BB0FA5F25CAD0AA009AF349 /* CDZPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDZPicker.m; sourceTree = "<group>"; };
 		0BB0FA6025CAD0AA009AF349 /* CDZPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDZPicker.h; sourceTree = "<group>"; };
 		0BF1EF172654174B0086DAEC /* AudioOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioOptions.h; sourceTree = "<group>"; };
@@ -268,7 +268,7 @@
 		0B379DB025849CB500D898E6 /* rtc */ = {
 			isa = PBXGroup;
 			children = (
-				0B379DB125849CB500D898E6 /* QttRtcEngine.h */,
+				0B50BBAA26574CB900346248 /* QttChannelEngine.h */,
 			);
 			path = rtc;
 			sourceTree = "<group>";
