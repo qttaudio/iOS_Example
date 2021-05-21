@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "QttRtcEngine.h"
+#import "QttChannelEngine.h"
 
 
 //音乐播放状态

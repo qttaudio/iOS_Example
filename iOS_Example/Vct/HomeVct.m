@@ -16,7 +16,7 @@
 #import "OnWheat.h"
 #import "TimeUtils.h"
 #import "ToastUtil.h"
-#import "QttRtcEngine.h"
+#import "QttChannelEngine.h"
 #import "ConfigConstans.h"
 #import "NSBundle+Helper.h"
 #import "SVProgressHUD.h"
@@ -32,7 +32,7 @@
 #define defaultColumnsNum 4
 
 
-@interface HomeVct ()<UICollectionViewDelegate,UICollectionViewDataSource,QttRtcEngineDelegate>
+@interface HomeVct ()<UICollectionViewDelegate,UICollectionViewDataSource,QttChannelEngineDelegate>
 {
     //上麦信息数据
     NSMutableArray *onWheatArray;
