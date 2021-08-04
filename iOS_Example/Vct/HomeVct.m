@@ -145,20 +145,14 @@
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         //解除SDK包名限制
         [NSBundle startChange];
-        
         //库初始化
-        [QttChannelEngine setAppkey:APPID];
-        [QttChannelEngine setDevLicense:@"" userSerial:@""];
-        self->rtcEngine = [QttChannelEngine getChannelInstance];
-        //设置监听
-        [self->rtcEngine setObserver:self];
+        self->rtcEngine = [QttChannelEngine GetEngineInstance:APPID delegate:self];
         //设置为观众
         [self->rtcEngine changeRole:AUDIENCE];
         //静音状态
         [self->rtcEngine mute:0 mute:NO];
         //进入房间
-        [self->rtcEngine join:roomNum token:TOKEN zone:0];
-        
+        [self->rtcEngine join:arc4random() channelId:roomNum token:TOKEN];
         
         //恢复包名
        [NSBundle reSetChange];

@@ -17,77 +17,77 @@ typedef NS_ENUM(NSInteger, QttLogLevel) {
 };
 
 typedef NS_ENUM(NSInteger, QttErrorCode) {
-    ERR_OK                         = 0, //没有错误
-    ERR_FAILURE                    = 1, //没有明确归类的错误
-    ERR_PARAM_ERROR                = 2, //API调用了无效的参数
-    ERR_START_CAPTURE_DEVICE_FAIL  = 3, //启动音频采集设备失败
-    ERR_START_PLAYOUT_DEVICE_FAIL  = 4, //启动音频播放设备失败
-    ERR_AUDIO_ROUTR_FAIL           = 5, //音频路由错误
-    ERR_INVALID_APPKEY             = 6, //APPKEY无效
-    ERR_CLIENT_IS_BANNED_BY_SERVER = 7  //此用户被服务器禁止,服务端踢人场景时会报这个错
+ERR_OK                         = 0, //没有错误
+ERR_FAILURE                    = 1, //没有明确归类的错误
+ERR_PARAM_ERROR                = 2, //API调用了无效的参数
+ERR_START_CAPTURE_DEVICE_FAIL  = 3, //启动音频采集设备失败
+ERR_START_PLAYOUT_DEVICE_FAIL  = 4, //启动音频播放设备失败
+ERR_AUDIO_ROUTR_FAIL           = 5, //音频路由错误
+ERR_INVALID_APPKEY             = 6, //APPKEY无效
+ERR_CLIENT_IS_BANNED_BY_SERVER = 7  //此用户被服务器禁止,服务端踢人场景时会报这个错
 };
 
 typedef NS_ENUM(NSInteger, QttWarnCode) {
-    WARN_WRONG_CALL_SEQUENCE      = 1000, //API调用顺序有误
-    WARN_DNS_RESOLVE_FAIL         = 1001, //域名解析出错
-    WARN_FIND_SERVER_FAIL         = 1002, //查找服务器失败
-    WARN_FIND_SERVER_TIMEOUT      = 1003, //查找服务器超时
-    WARN_FIND_SERVER_INTERRUPT    = 1004, //查找服务器中断
-    WARN_FIND_SERVER_REJECT       = 1005, //查找服务器被拒绝
-    WARN_FIND_SERVER_UNAVAILABLE  = 1006, //没有找到可用服务器
-    WARN_CONNECT_SERVER_FAIL      = 1007, //连接服务器失败
-    WARN_CONNECT_SERVER_TIMEOUT   = 1008, //连接服务器超时
-    WARN_CONNECT_SERVER_INTERRUPT = 1009, //连接服务器中断
-    WARN_CONNECT_SERVER_REJECT    = 1010, //连接服务器被拒绝
-    WARN_PHONE_CALL_INTERRUPT     = 1011  //音频被电话通话中断
+WARN_WRONG_CALL_SEQUENCE      = 1000, //API调用顺序有误
+WARN_DNS_RESOLVE_FAIL         = 1001, //域名解析出错
+WARN_FIND_SERVER_FAIL         = 1002, //查找服务器失败
+WARN_FIND_SERVER_TIMEOUT      = 1003, //查找服务器超时
+WARN_FIND_SERVER_INTERRUPT    = 1004, //查找服务器中断
+WARN_FIND_SERVER_REJECT       = 1005, //查找服务器被拒绝
+WARN_FIND_SERVER_UNAVAILABLE  = 1006, //没有找到可用服务器
+WARN_CONNECT_SERVER_FAIL      = 1007, //连接服务器失败
+WARN_CONNECT_SERVER_TIMEOUT   = 1008, //连接服务器超时
+WARN_CONNECT_SERVER_INTERRUPT = 1009, //连接服务器中断
+WARN_CONNECT_SERVER_REJECT    = 1010, //连接服务器被拒绝
+WARN_PHONE_CALL_INTERRUPT     = 1011  //音频被电话通话中断
 };
 
 typedef NS_ENUM(NSInteger, QttChannelRole) {
-    TALKER = 0,  //主播，可说可听
-    AUDIENCE = 1 //听众，只能听不能说
+TALKER = 0,  //主播，可说可听
+AUDIENCE = 1 //听众，只能听不能说
 };
 
 typedef NS_ENUM(NSInteger, QttChannelScene) {
-    CHANNEL_MAIN_TALK = 0, //通话场景
-    CHANNEL_MAIN_LIVE = 1  //直播场景
+CHANNEL_MAIN_TALK = 0, //通话场景
+CHANNEL_MAIN_LIVE = 1  //直播场景
 };
 
 typedef NS_ENUM(NSInteger, QttSoundPlayerStateType) {
-    SOUND_PLAYER_STATE_PLAYING  = 0, //正常播放
-    SOUND_PLAYER_STATE_PAUSED   = 1, //暂停播放
-    SOUND_PLAYER_STATE_STOPPED  = 2, //停止播放
-    SOUND_PLAYER_STATE_FAILED   = 3, //播放失败
-    SOUND_PLAYER_STATE_FINISHED = 4  //播放完成
+SOUND_PLAYER_STATE_PLAYING  = 0, //正常播放
+SOUND_PLAYER_STATE_PAUSED   = 1, //暂停播放
+SOUND_PLAYER_STATE_STOPPED  = 2, //停止播放
+SOUND_PLAYER_STATE_FAILED   = 3, //播放失败
+SOUND_PLAYER_STATE_FINISHED = 4  //播放完成
 };
 
 typedef NS_ENUM(NSInteger, QttAudioRouteType) {
-    AUDIO_ROUTE_HEADSET      = 0, //耳机为语音路由
-    AUDIO_ROUTE_EARPIECE     = 1, //听筒为语音路由
-    AUDIO_ROUTE_SPEAKERPHONE = 2, //手机的扬声器为语音路由
-    AUDIO_ROUTE_BLUETOOTH    = 3  //蓝牙耳机为语音路由
+AUDIO_ROUTE_HEADSET      = 0, //耳机为语音路由
+AUDIO_ROUTE_EARPIECE     = 1, //听筒为语音路由
+AUDIO_ROUTE_SPEAKERPHONE = 2, //手机的扬声器为语音路由
+AUDIO_ROUTE_BLUETOOTH    = 3  //蓝牙耳机为语音路由
 };
 
 typedef NS_ENUM(NSInteger, QttAudioQuality) {
-    AUDIO_QUALITY_SPEECH_MONO   = 0,
-    AUDIO_QUALITY_SPEECH_STEREO = 1,
-    AUDIO_QUALITY_MUSIC_MONO    = 2,
-    AUDIO_QUALITY_MUSIC_STEREO  = 3
+AUDIO_QUALITY_SPEECH_MONO   = 0,
+        AUDIO_QUALITY_SPEECH_STEREO = 1,
+        AUDIO_QUALITY_MUSIC_MONO    = 2,
+        AUDIO_QUALITY_MUSIC_STEREO  = 3
 };
 
 typedef NS_ENUM(NSInteger, QttAudioMode) {
-    AUDIO_MODE_CALL  = 0,
-    AUDIO_MODE_LIVE  = 1,
-    AUDIO_MODE_MIX   = 2,
-    AUDIO_MODE_LIVE2 = 3
+AUDIO_MODE_CALL  = 0,
+        AUDIO_MODE_LIVE  = 1,
+        AUDIO_MODE_MIX   = 2,
+        AUDIO_MODE_LIVE2 = 3
 };
 
 typedef NS_ENUM(NSInteger, QttQualityType) {
-    QUALITY_UNKNOWN = 0, //网络质量未知
-    QUALITY_VGOOD   = 1, //网络质量好，通话流畅
-    QUALITY_GOOD    = 2, //网络质量较好，偶有卡顿
-    QUALITY_POOR    = 3, //网络质量差，但不影响沟通
-    QUALITY_BAD     = 4, //网络质量比较差，勉强能沟通
-    QUALITY_VBAD    = 5  //网络质量非常差，基本不能沟通
+QUALITY_UNKNOWN = 0, //网络质量未知
+QUALITY_VGOOD   = 1, //网络质量好，通话流畅
+QUALITY_GOOD    = 2, //网络质量较好，偶有卡顿
+QUALITY_POOR    = 3, //网络质量差，但不影响沟通
+QUALITY_BAD     = 4, //网络质量比较差，勉强能沟通
+QUALITY_VBAD    = 5  //网络质量非常差，基本不能沟通
 };
 
 @interface QttRtcStat : NSObject
@@ -109,7 +109,6 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
      * 获取到数据
      * @param buf
      * @param len
-     * @param observerId
      */
     - (int)onData:(char *)buf len:(int)len;
 @end;
@@ -166,7 +165,7 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
      * @param message 错误描述
      */
     - (void)onError:(int)err message:(NSString*)message;
-        
+
     /**
      * 实现退出频道的逻辑
      */
@@ -220,7 +219,7 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
      * @param state 播放状态，见QttSoundPlayerStateType
      */
     - (void)onSoundStateChanged:(int)state;
-        
+
     /**
      * 音效文件播放完毕
      * @param effectId 音效Id
@@ -233,92 +232,54 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
  * 将通话抽象为进入频道,同一个频道内的用户可互相语聊
  */
 @interface QttChannelEngine : NSObject
-
     /**
      * 设置日志文件
      * @param logFile log文件绝对路径，必须保证log文件所在目录存在且可写
      * @param maxSize -1为不限制大小, 单位为KB, 默认为512KB
      */
-    + (void)setLogFile:(NSString*)logFile maxSize:(int)maxSize;
+    + (void)SetLogFile:(NSString *)logFile maxSize:(int)maxSize;
 
     /**
      * 设置日志输出等级
      * 日志级别顺序依次为 OFF、FATAL、ERROR、WARNING、MESSAGE 和 DEBUG。可以看到设置的级别之前所有级别的日志信息。
      * @param level 日志级别
      */
-    + (void)setLogLevel:(QttLogLevel)level;
-
-    /**
-     * 设置App授权信息,getEngineInstance方法前非必须调用
-     * @param licenseFile app.license文件路径
-     */
-    + (void)setAppLicense:(NSString*)licenseFile;
-
-    /**
-     * 设置Dev授权信息,getEngineInstance方法前非必须调用
-     * @param licenseDir 授权文件存放目录
-     * @param userSerial 用户序列号,便于设备标示绑定
-     */
-    + (void)setDevLicense:(NSString*)licenseDir userSerial:(NSString*)userSerial;
-
-    /**
-     * 设置appkey,getChannelInstance方法前调用，必须设置
-     * @param appkey appkey字符串
-     */
-    + (void)setAppkey:(NSString*)appkey;
+    + (void)SetLogLevel:(QttLogLevel)level;
 
     /**
      * 初始化获取QttChannelEngine对象指针,单例
      * @return QttChannelEngine对象指针
      */
-    + (instancetype)getChannelInstance;
+    + (instancetype)GetEngineInstance:(NSString *_Nonnull)appKey delegate:(id <QttChannelEngineDelegate> _Nullable)delegate;
 
     /**
      * 释放QttChannelEngine实例
      */
-    + (void)destroy;
-
-    /**
-     * 获取QTT激活序列号
-     * @return 返回XXXX-XXXX-XXXX-XXXX或者NULL
-     */
-    + (NSString*)getQttSerial;
+    + (void)Destroy;
 
     /**
     * 获取SDK版本号
     * @return SDK版本号
     */
-    + (NSString*)getQttVersion;
+    + (NSString*)GetSdkVersion;
 
     /**
-     * 如果getChannelInstance返回NULL空指针，调用该接口获取出错信息
+     * 如果QttChannelEngine返回NULL空指针，调用该接口获取出错信息
      * @return 出错信息
      */
-    + (NSString*)getError;
+    + (NSString*)GetError;
 
     /**
-     * TODO
+     * 根据用户对音质、声道、场景等的不同需求，预制了不同模式，用户可以选择不同的音频属性，获得最佳实时互动效果。
+     * 注： 设置音频属性需要在加入频道进行通话之前设置。
+     * @param quality 语音质量
+     * @param mode 音频模式类型
+     * @return
+         - 0(ERR_SUCCESS): 成功.
+         - < 0: 失败.
      */
     - (int)setAudioConfig:(QttAudioQuality)quality mode:(QttAudioMode)mode;
-    
-    /**
-     * 设置频道事件观察者
-     * @param observer 观察者对象
-     * @return
-     - 0(ERR_SUCCESS): 成功.
-     - < 0: 失败.
-     */
-    - (int)setObserver:(id<QttChannelEngineDelegate>)observer;
-    
-    /**
-     * 设置用户id
-     * @param uid 用户id
-     * @return
-     - 0(ERR_SUCCESS): 成功.
-     - < 0: 失败.
-     */
-    - (int)setUid:(unsigned int)uid;
-    
+
     /**
      * 设置原始音频采集数据监听器，可修改数据，但不能改变数据大小
      * @param observer 数据监听器
@@ -329,7 +290,7 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
      - < 0: 失败.
      */
     - (int)setRecordDataObserver:(id<QttRtcDataDelegate>)observer samplerate:(int)samplerate channels:(int)channels bufSize:(int)bufSize;
-    
+
     /**
      * 设置原始音频播放数据监听器，可修改数据，但不能改变数据大小
      * @param observer 数据监听器
@@ -382,18 +343,34 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
      - < 0: 失败.
      */
     - (int)setVolumeDetection:(int)intervalMs;
-    
+
+    /**
+     * 开启音频，默认就是开的，join&leave前后都有效，全局作用
+     * @return
+     *   - 0(ERR_SUCCESS): 成功.
+         - < 0: 失败.
+     */
+    - (int)enableAudio;
+
+    /**
+     * 关闭音频，join&leave前后都有效，全局作用
+     * @return
+     *   - 0(ERR_SUCCESS): 成功.
+         - < 0: 失败.
+     */
+    - (int)disableAudio;
+
     /**
      * 进入频道，进入成功还是失败的结果在回调通知
+     * @param uid 用户id
      * @param channelId 频道名称
      * @param token 验证token
-     * @param zone分区，如果为0，由系统指定最佳服务器；否则由用户指定使用该分区的服务器
      * @return
      - 0(ERR_SUCCESS): 成功.
      - < 0: 失败.
      */
-    - (int)join:(NSString*)channelId token:(NSString*)token zone:(int)zone;
-    
+    - (int)join:(unsigned int)uid channelId:(NSString*)channelId token:(NSString*)token;
+
     /**
      * 开启（关闭）扬声器
      * @param on true，开启；false，关闭
@@ -419,7 +396,7 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
      - < 0: 失败.
      */
     - (int)changeRole:(QttChannelRole)role;
-    
+
     /**
      * mute频道成员
      * @param uid 用户id,0可以表示为自己
@@ -429,7 +406,7 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
      - < 0: 失败.
      */
     - (int)mute:(unsigned int)uid mute:(bool)mute;
-    
+
     /**
      * mute所有频道其他成员
      * @param mute true为静音；false为不静音
@@ -438,7 +415,17 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
      - < 0: 失败.
      */
     - (int)muteAllRemote:(bool)mute;
-    
+
+    /**
+     * 设置是否默认接收远端用户音频流
+     * @param mute true：默认不接收所有远端音频流
+                   false：默认接收所有远端音频流（默认）
+     * @return
+         - 0(ERR_SUCCESS): 成功.
+         - < 0: 失败.
+     */
+    - (int)setDefaultMuteAllRemote:(bool)mute;
+
     /**
      * 调节频道内uid用户说话的音量
      * @param uid 用户id
@@ -448,7 +435,7 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
      - < 0: 失败.
      */
     - (int)adjustUserVolume:(unsigned int)uid vol:(int)vol;
-    
+
     /**
      * 调节mic采集音量
      * @param vol [0-400],默认为100，0为无声
@@ -457,7 +444,7 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
      - < 0: 失败.
      */
     - (int)adjustMicVolume:(int)vol;
-    
+
     /**
      * 调节总的播放音量
      * @param vol [0-400],默认为100，0为无声
@@ -466,7 +453,7 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
      - < 0: 失败.
      */
     - (int)adjustPlayVolume:(int)vol;
-    
+
     /**
      * 频道内录音
      * @param wavFile 保存的wav文件路径，如果文件路径不存在，会创建
@@ -475,7 +462,7 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
      - < 0: 失败.
      */
     - (int)startRecord:(NSString*)wavFile;
-    
+
     /**
      * 停止录音
      * @return
@@ -483,19 +470,19 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
      - < 0: 失败.
      */
     - (int)stopRecord;
-    
+
     /**
      * 开启/关闭耳返
      * @param enable true启用；false关闭
      */
     - (int)enableInEarMonitoring:(bool)enable;
-    
+
     /**
      * 设置耳返音量
      * @param volume [0-100],默认为100
      */
     - (int)setInEarMonitoringVolume:(int)volume;
-    
+
     /**
      * 离开频道
      * @return
@@ -503,7 +490,7 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
      - < 0: 失败.
      */
     - (int)leave;
-    
+
     /*
      * 开始播放声音文件。
      * 成功调用该方法后，后续的播放状态变化通过onSoundStateChanged获取。
@@ -517,7 +504,7 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
      - < 0: 失败.
      */
     - (int)playSound:(NSString*)filePath cycle:(int)cycle publish:(bool)publish;
-    
+
     /*
      * 停止播放声音文件。
      * @return
@@ -525,7 +512,7 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
      - < 0: 失败.
      */
     - (int)stopSound;
-    
+
     /*
      * 暂停播放声音文件。
      * @return
@@ -533,7 +520,7 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
      - < 0: 失败.
      */
     - (int)pauseSound;
-    
+
     /*
      * 恢复播放声音文件。
      * @return
@@ -541,7 +528,7 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
      - < 0: 失败.
      */
     - (int)resumeSound;
-    
+
     /*
      * 设置声音文件的播放位置。
      * @param pos 声音文件的播放位置，单位为毫秒。
@@ -550,7 +537,7 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
      - < 0: 失败.
      */
     - (int)setSoundPosition:(int)pos;
-    
+
     /*
      * 获取声音文件的播放进度，单位为毫秒。
      * @return
@@ -558,7 +545,7 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
      - < 0: 失败.
      */
     - (int)getSoundPosition;
-    
+
     /*
      * 获取声音文件总时长，单位为毫秒。
      * @return
@@ -566,7 +553,7 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
      - < 0: 失败.
      */
     - (int)getSoundDuration;
-    
+
     /*
      * 调整播放的声音文件的音调。
      * @param pitch 按半音音阶调整本地播放的音乐文件的音调，默认值为0，即不调整音调，取值范围为 [-12,12]。
@@ -575,7 +562,7 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
      - < 0: 失败.
      */
     - (int)setSoundPitch:(int)pitch;
-    
+
     /*
      * 调节声音文件播放音量。
      * @param vol 声音文件音量范围为 0~100。100（默认值）为原始文件音量。
@@ -584,7 +571,7 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
      - < 0: 失败.
      */
     - (int)setSoundVolume:(int)vol;
-    
+
     /*
      * 调节声音文件本地播放音量。
      * @param vol 声音文件音量范围为 0~100。100（默认值）为原始文件音量。
@@ -593,7 +580,7 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
      - < 0: 失败.
      */
     - (int)setSoundPlayoutVolume:(int)vol;
-    
+
     /*
      * 调节声音文件远端播放音量。
      * @param vol 声音文件音量范围为 0~100。100（默认值）为原始文件音量。
@@ -602,7 +589,7 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
      - < 0: 失败.
      */
     - (int)setSoundPublishVolume:(int)vol;
-    
+
     /*
      * 获取声音文件的本地播放音量。
      * @return
@@ -610,7 +597,7 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
      - < 0: 失败.
      */
     - (int)getSoundPlayoutVolume;
-    
+
     /*
      * 获取声音文件的远端播放音量。
      * @return
@@ -618,7 +605,7 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
      - < 0: 失败.
      */
     - (int)getSoundPublishVolume;
-    
+
     /*
      * 开始播放音效文件。
      * 可以多次调用该方法，同时播放多个音效文件，实现音效叠加。
@@ -634,7 +621,7 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
      - < 0: 失败.
      */
     - (int)playEffect:(int)effectId filePath:(NSString*)filePath cycle:(int)cycle publish:(bool)publish;
-    
+
     /*
      * 停止播放音效文件。
      * @param effectId 音效文件ID。
@@ -643,7 +630,7 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
      - < 0: 失败.
      */
     - (int)stopEffect:(int)effectId;
-    
+
     /*
      * 停止播放所有音效文件。
      * @return
@@ -659,7 +646,7 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
      - < 0: 失败.
      */
     - (int)pauseEffect:(int)effectId;
-    
+
     /*
      * 暂停播放所有音效文件。
      * @return
@@ -667,7 +654,7 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
      - < 0: 失败.
      */
     - (int)pauseAllEffects;
-    
+
     /*
      * 恢复播放音效文件。
      * @param effectId 音效文件ID。
@@ -676,7 +663,7 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
      - < 0: 失败.
      */
     - (int)resumeEffect:(int)effectId;
-    
+
     /*
      * 恢复播放所有音效文件。
      * @return
@@ -684,7 +671,7 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
      - < 0: 失败.
      */
     - (int)resumeAllEffects;
-    
+
     /*
      * 获取播放音效文件音量。
      * @return
@@ -692,7 +679,7 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
      - < 0: 失败.
      */
     - (int)getEffectsVolume;
-    
+
     /*
      * 设置音效文件的播放音量。
      * @param vol 音效文件音量范围为 0~100。100（默认值）为原始文件音量。
@@ -701,7 +688,7 @@ typedef NS_ENUM(NSInteger, QttQualityType) {
      - < 0: 失败.
      */
     - (int)setEffectsVolume:(int)volume;
-    
+
     /*
      * 设置指定音效文件的音量。
      * @param effectId 音效文件ID。
