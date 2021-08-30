@@ -150,7 +150,7 @@
         //设置为观众
         [self->rtcEngine changeRole:AUDIENCE];
         //静音状态
-        [self->rtcEngine mute:0 mute:NO];
+        [self->rtcEngine muteLocalAudio:NO];
         //进入房间
         [self->rtcEngine join:arc4random() channelId:roomNum token:TOKEN];
         
@@ -172,6 +172,7 @@
  */
 - (IBAction)closeAction:(id)sender {
     [rtcEngine leave];
+    [QttChannelEngine Destroy];
     rtcEngine = nil;
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -215,6 +216,8 @@
         [self->rtcEngine stopAllEffects];
         [self->rtcEngine stopSound];
         [self->rtcEngine leave];
+        [QttChannelEngine Destroy];
+        rtcEngine = nil;
     }
 }
 #pragma mark - 耳机状态监听
@@ -630,7 +633,7 @@
         [self.cv_content reloadData];
 //        [self addMessage2Txt:[NSString stringWithFormat:@"%ld（我）%@",myUid,mark?@"静麦了":@"开麦了"]];
         [self setButtonSelected:self.btn_silence withIsSelect:mark withNewTitle:mark?@"开麦":@"静麦"];
-        [rtcEngine mute:0 mute:mark];
+        [rtcEngine muteLocalAudio:mark];
     }else{
         [ToastUtil showToast:@"请先上麦"];
     }
@@ -642,7 +645,7 @@
 {
     BOOL mark = !self.btn_voice.isSelected;
     [self setButtonSelected:self.btn_voice withIsSelect:mark withNewTitle:mark?@"开启声音":@"关闭声音"];
-    [rtcEngine muteAllRemote:mark];
+    [rtcEngine muteAllRemoteAudio:mark];
 }
 
 //外放事件

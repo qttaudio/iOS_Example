@@ -398,14 +398,23 @@ QUALITY_VBAD    = 5  //网络质量非常差，基本不能沟通
     - (int)changeRole:(QttChannelRole)role;
 
     /**
-     * mute频道成员
-     * @param uid 用户id,0可以表示为自己
-     * @param mute true为静音；false为不静音
-     * @return
+    * 取消或恢复发布本地音频流。
+    * @param mute true为静音；false为不静音
+    * @return
      - 0(ERR_SUCCESS): 成功.
      - < 0: 失败.
+    */
+    - (int)muteLocalAudio:(bool)mute;
+
+    /**
+     * 取消或恢复订阅指定远端用户的音频流
+     * @param uid 用户id
+     * @param mute true为静音；false为不静音
+     * @return
+         - 0(ERR_SUCCESS): 成功.
+         - < 0: 失败.
      */
-    - (int)mute:(unsigned int)uid mute:(bool)mute;
+    - (int)muteRemoteAudio:(unsigned int)uid mute:(bool)mute;
 
     /**
      * mute所有频道其他成员
@@ -414,7 +423,7 @@ QUALITY_VBAD    = 5  //网络质量非常差，基本不能沟通
      - 0(ERR_SUCCESS): 成功.
      - < 0: 失败.
      */
-    - (int)muteAllRemote:(bool)mute;
+    - (int)muteAllRemoteAudio:(bool)mute;
 
     /**
      * 设置是否默认接收远端用户音频流
@@ -424,7 +433,7 @@ QUALITY_VBAD    = 5  //网络质量非常差，基本不能沟通
          - 0(ERR_SUCCESS): 成功.
          - < 0: 失败.
      */
-    - (int)setDefaultMuteAllRemote:(bool)mute;
+    - (int)setDefaultMuteAllRemoteAudio:(bool)mute;
 
     /**
      * 调节频道内uid用户说话的音量
