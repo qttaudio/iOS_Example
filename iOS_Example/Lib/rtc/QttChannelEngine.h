@@ -115,7 +115,6 @@ QUALITY_VBAD    = 5  //网络质量非常差，基本不能沟通
 
 @protocol QttChannelEngineDelegate <NSObject>
 @optional
-
     /**
     * 自己加入成功，实现加入频道成功的逻辑
     * @param channelName 频道名字
@@ -124,8 +123,16 @@ QUALITY_VBAD    = 5  //网络质量非常差，基本不能沟通
     * @param muted 加入频道的静音状态。0表示未静音，1表示静音
     * @param isReconnect 是否是断线重连加入
     */
-    - (void)onJoinSuccess:(NSString*)channelName uid:(NSUInteger)uid role:(QttChannelRole)role muted:(bool)muted isReconnect:(bool)isReconnect;
+    - (void)onJoinSuccess:(NSString*)channelName uid:(NSUInteger)uid role:(QttChannelRole)role muted:(bool)muted;
 
+    /**
+     * 自己重新加入频道成功
+     * @param channelName 频道名字
+     * @param uid 用户id。
+     * @param role 重新加入频道的角色。TALKER表示主播，可说可听；AUDIENCE表示听众，只能听不能说
+     * @param muted 重新加入频道的静音状态。0表示未静音，1表示静音
+     */
+    - (void)onReJoinSuccess:(NSString*)channelName uid:(NSUInteger)uid role:(QttChannelRole)role muted:(bool)muted;
 
     /**
      * 其他用户加入，实现别人进入频道的逻辑
@@ -183,7 +190,7 @@ QUALITY_VBAD    = 5  //网络质量非常差，基本不能沟通
      * @param volumeInfos 用户音量信息集合
      * @param userNum volumeInfos中用户个数
      */
-    - (void)onTalking:(NSArray<QttVolumeInfo*> *_Nonnull)volumeInfos userNum:(NSInteger)userNum;
+    - (void)onTalkingVolumeIndication:(NSArray<QttVolumeInfo*> *_Nonnull)volumeInfos userNum:(NSInteger)userNum;
 
     /**
      * 用户mute状态，实现静音状态改变的逻辑
@@ -361,15 +368,15 @@ QUALITY_VBAD    = 5  //网络质量非常差，基本不能沟通
     - (int)disableAudio;
 
     /**
-     * 进入频道，进入成功还是失败的结果在回调通知
-     * @param uid 用户id
-     * @param channelId 频道名称
-     * @param token 验证token
-     * @return
+    * 进入频道，进入成功还是失败的结果在回调通知
+    * @param token 验证token
+    * @param channelId 频道名称
+    * @param uid 用户ID，32位无符号整数。如果不指定（即设为0），SDK 会自动分配一个，并在 onJoinSuccess 回调方法中返回。
+    * @return
      - 0(ERR_SUCCESS): 成功.
      - < 0: 失败.
-     */
-    - (int)join:(unsigned int)uid channelId:(NSString*)channelId token:(NSString*)token;
+    */
+    - (int)join:(NSString*)token channelId:(NSString*)channelId uid:(unsigned int)uid;
 
     /**
      * 开启（关闭）扬声器
@@ -443,7 +450,7 @@ QUALITY_VBAD    = 5  //网络质量非常差，基本不能沟通
      - 0(ERR_SUCCESS): 成功.
      - < 0: 失败.
      */
-    - (int)adjustUserVolume:(unsigned int)uid vol:(int)vol;
+    - (int)adjustUserPlaybackVolume:(unsigned int)uid vol:(int)vol;
 
     /**
      * 调节mic采集音量
@@ -452,7 +459,7 @@ QUALITY_VBAD    = 5  //网络质量非常差，基本不能沟通
      - 0(ERR_SUCCESS): 成功.
      - < 0: 失败.
      */
-    - (int)adjustMicVolume:(int)vol;
+    - (int)adjustRecordingVolume:(int)vol;
 
     /**
      * 调节总的播放音量
@@ -461,7 +468,7 @@ QUALITY_VBAD    = 5  //网络质量非常差，基本不能沟通
      - 0(ERR_SUCCESS): 成功.
      - < 0: 失败.
      */
-    - (int)adjustPlayVolume:(int)vol;
+    - (int)adjustPlaybackVolume:(int)vol;
 
     /**
      * 频道内录音
@@ -512,7 +519,7 @@ QUALITY_VBAD    = 5  //网络质量非常差，基本不能沟通
      - 0(ERR_SUCCESS): 成功.
      - < 0: 失败.
      */
-    - (int)playSound:(NSString*)filePath cycle:(int)cycle publish:(bool)publish;
+    - (int)startSoundMixing:(NSString*)filePath cycle:(int)cycle publish:(bool)publish;
 
     /*
      * 停止播放声音文件。
@@ -520,7 +527,7 @@ QUALITY_VBAD    = 5  //网络质量非常差，基本不能沟通
      - 0(ERR_SUCCESS): 成功.
      - < 0: 失败.
      */
-    - (int)stopSound;
+    - (int)stopSoundMixing;
 
     /*
      * 暂停播放声音文件。
@@ -528,7 +535,7 @@ QUALITY_VBAD    = 5  //网络质量非常差，基本不能沟通
      - 0(ERR_SUCCESS): 成功.
      - < 0: 失败.
      */
-    - (int)pauseSound;
+    - (int)pauseSoundMixing;
 
     /*
      * 恢复播放声音文件。
@@ -536,7 +543,7 @@ QUALITY_VBAD    = 5  //网络质量非常差，基本不能沟通
      - 0(ERR_SUCCESS): 成功.
      - < 0: 失败.
      */
-    - (int)resumeSound;
+    - (int)resumeSoundMixing;
 
     /*
      * 设置声音文件的播放位置。
@@ -545,7 +552,7 @@ QUALITY_VBAD    = 5  //网络质量非常差，基本不能沟通
      - 0(ERR_SUCCESS): 成功.
      - < 0: 失败.
      */
-    - (int)setSoundPosition:(int)pos;
+    - (int)setSoundMixingPosition:(int)pos;
 
     /*
      * 获取声音文件的播放进度，单位为毫秒。
@@ -553,7 +560,7 @@ QUALITY_VBAD    = 5  //网络质量非常差，基本不能沟通
      - >= 0: 音乐文件当前播放进度
      - < 0: 失败.
      */
-    - (int)getSoundPosition;
+    - (int)getSoundMixingCurrentPosition;
 
     /*
      * 获取声音文件总时长，单位为毫秒。
@@ -561,7 +568,7 @@ QUALITY_VBAD    = 5  //网络质量非常差，基本不能沟通
      - >= 0: 声音文件时长。
      - < 0: 失败.
      */
-    - (int)getSoundDuration;
+    - (int)getSoundMixingDuration;
 
     /*
      * 调整播放的声音文件的音调。
@@ -570,7 +577,7 @@ QUALITY_VBAD    = 5  //网络质量非常差，基本不能沟通
      - 0(ERR_SUCCESS): 成功.
      - < 0: 失败.
      */
-    - (int)setSoundPitch:(int)pitch;
+    - (int)setSoundMixingPitch:(int)pitch;
 
     /*
      * 调节声音文件播放音量。
@@ -579,7 +586,7 @@ QUALITY_VBAD    = 5  //网络质量非常差，基本不能沟通
      - 0(ERR_SUCCESS): 成功.
      - < 0: 失败.
      */
-    - (int)setSoundVolume:(int)vol;
+    - (int)adjustSoundMixingVolume:(int)vol;
 
     /*
      * 调节声音文件本地播放音量。
@@ -588,7 +595,7 @@ QUALITY_VBAD    = 5  //网络质量非常差，基本不能沟通
      - 0(ERR_SUCCESS): 成功.
      - < 0: 失败.
      */
-    - (int)setSoundPlayoutVolume:(int)vol;
+    - (int)adjustSoundMixingPlayoutVolume:(int)vol;
 
     /*
      * 调节声音文件远端播放音量。
@@ -597,7 +604,7 @@ QUALITY_VBAD    = 5  //网络质量非常差，基本不能沟通
      - 0(ERR_SUCCESS): 成功.
      - < 0: 失败.
      */
-    - (int)setSoundPublishVolume:(int)vol;
+    - (int)adjustSoundMixingPublishVolume:(int)vol;
 
     /*
      * 获取声音文件的本地播放音量。
@@ -605,7 +612,7 @@ QUALITY_VBAD    = 5  //网络质量非常差，基本不能沟通
      - >= 0: 声音文件的本地播放音量，范围为 [0, 100]。
      - < 0: 失败.
      */
-    - (int)getSoundPlayoutVolume;
+    - (int)getSoundMixingPlayoutVolume;
 
     /*
      * 获取声音文件的远端播放音量。
@@ -613,7 +620,7 @@ QUALITY_VBAD    = 5  //网络质量非常差，基本不能沟通
      - >= 0: 声音文件的远端播放音量，范围为 [0, 100]。
      - < 0: 失败.
      */
-    - (int)getSoundPublishVolume;
+    - (int)getSoundMixingPublishVolume;
 
     /*
      * 开始播放音效文件。

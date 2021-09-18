@@ -152,7 +152,7 @@
         //静音状态
         [self->rtcEngine muteLocalAudio:NO];
         //进入房间
-        [self->rtcEngine join:arc4random() channelId:roomNum token:TOKEN];
+        [self->rtcEngine join:TOKEN channelId:roomNum uid:arc4random()];
         
         //恢复包名
        [NSBundle reSetChange];
@@ -214,7 +214,7 @@
 {
     if (self->rtcEngine) {
         [self->rtcEngine stopAllEffects];
-        [self->rtcEngine stopSound];
+        [self->rtcEngine stopSoundMixing];
         [self->rtcEngine leave];
         [QttChannelEngine Destroy];
         rtcEngine = nil;
@@ -321,21 +321,22 @@
 }
 #pragma mark - QttChannelEngineDelegate
 
-- (void)onJoinSuccess:(NSString*)channelName uid:(NSUInteger)uid role:(QttChannelRole)role muted:(bool)muted isReconnect:(bool)isReconnect {
+- (void)onJoinSuccess:(NSString*)channelName uid:(NSUInteger)uid role:(QttChannelRole)role muted:(bool)muted {
     [SVProgressHUD dismiss];
     //我进入房间
     myUid = uid;
 
-    
-    if(!isReconnect){
-        [self addMessage2Txt:[NSString stringWithFormat:@"用户%ld(我)%@",myUid,@"进入房间了."]];
-        userCount ++;
-        [_btn_person setTitle:[NSString stringWithFormat:@"%ld",(long)userCount] forState:UIControlStateNormal];
-    }else{
-        [ToastUtil showToast:@"重连成功"];
-    }
+    [self addMessage2Txt:[NSString stringWithFormat:@"用户%ld(我)%@",myUid,@"进入房间了."]];
+    userCount ++;
+    [_btn_person setTitle:[NSString stringWithFormat:@"%ld",(long)userCount] forState:UIControlStateNormal];
 }
 
+- (void)onReJoinSuccess:(NSString*)channelName uid:(NSUInteger)uid role:(QttChannelRole)role muted:(bool)muted {
+    [SVProgressHUD dismiss];
+    //我进入房间
+    myUid = uid;
+    [ToastUtil showToast:@"重连成功"];
+}
 
 - (void)onOtherJoin:(NSUInteger)uid role:(QttChannelRole)role muted:(bool)muted {
 
@@ -611,7 +612,7 @@
         //停止音效
         [rtcEngine stopAllEffects];
         //停止音乐
-        [rtcEngine stopSound];
+        [rtcEngine stopSoundMixing];
         if (self.pop_bgMusic) {
             [self.pop_bgMusic stopAllAction];
         }

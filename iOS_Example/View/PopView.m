@@ -101,7 +101,7 @@
 {
     //非触摸时回调
     if (![self.progressView isTouchInside] && self.progressView.maximumValue > 0) {
-        self.progressView.value = [self.rtcEngine getSoundPosition];
+        self.progressView.value = [self.rtcEngine getSoundMixingCurrentPosition];
         self.label_startTime.text = [self getMinuteSecondWithTime:self.progressView.value];
     }
 }
@@ -110,16 +110,16 @@
 -(void) sliderProgressChange:(UISlider *)slider
 {
     if (slider == self.progressView) {//音频进度
-        [self.rtcEngine setSoundPosition:(int)slider.value];
+        [self.rtcEngine setSoundMixingPosition:(int)slider.value];
     }else if (slider == self.pv_music){//音乐
         self.label_musicValue.text = [NSString stringWithFormat:@"%.0f",slider.value];
-        [self.rtcEngine adjustPlayVolume:slider.value];
+        [self.rtcEngine adjustPlaybackVolume:slider.value];
     }else if (slider == self.pv_voice){//人声
         self.label_voiceValue.text = [NSString stringWithFormat:@"%.0f",slider.value];
-        [self.rtcEngine adjustMicVolume:slider.value];
+        [self.rtcEngine adjustRecordingVolume:slider.value];
     }else if (slider == self.pv_tone){//音调
         self.label_toneValue.text = [NSString stringWithFormat:@"%.0f",slider.value];
-        [self.rtcEngine setSoundPitch:slider.value];
+        [self.rtcEngine setSoundMixingPitch:slider.value];
         
     }
     
@@ -166,7 +166,7 @@
     if (self.progressView.maximumValue <= 1) {
         //设置时长
         self.progressView.minimumValue = 0;
-        self.progressView.maximumValue = [self.rtcEngine getSoundDuration];
+        self.progressView.maximumValue = [self.rtcEngine getSoundMixingDuration];
         self.progressView.continuous = NO;
         self.label_endTime.text = [self getMinuteSecondWithTime:self.progressView.maximumValue];
     }
@@ -178,7 +178,7 @@
     if (self.playState == READY) {
         self.playState = PLAYING;
         //开始播放
-        [self.rtcEngine playSound:self.musicPath cycle:1 publish:YES];
+        [self.rtcEngine startSoundMixing:self.musicPath cycle:1 publish:YES];
         //
         [self.btn_play setBackgroundImage:[UIImage imageNamed:@"suspend_icon"] forState:UIControlStateNormal];
         [self startTimer];
@@ -190,7 +190,7 @@
     }else if(self.playState == PLAYING){
         self.playState = PAUSE;
         //暂停播放
-        [self.rtcEngine pauseSound];
+        [self.rtcEngine pauseSoundMixing];
         //
         [self.btn_play setBackgroundImage:[UIImage imageNamed:@"play_icon"] forState:UIControlStateNormal];
         [self stopTimer];
@@ -201,7 +201,7 @@
     }else if(self.playState == PAUSE){
         self.playState = PLAYING;
         //重新播放
-        [self.rtcEngine resumeSound];
+        [self.rtcEngine resumeSoundMixing];
         //
         [self.btn_play setBackgroundImage:[UIImage imageNamed:@"suspend_icon"] forState:UIControlStateNormal];
         [self startTimer];
@@ -225,7 +225,7 @@
 -(void) stopAllAction
 {
     self.playState = READY;
-    [self.rtcEngine stopSound];
+    [self.rtcEngine stopSoundMixing];
     [self.btn_play setBackgroundImage:[UIImage imageNamed:@"play_icon"] forState:UIControlStateNormal];
     self.progressView.value = 0.0f;
     self.label_startTime.text = @"00:00";
